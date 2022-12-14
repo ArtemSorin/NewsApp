@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/screens/current_news_screen.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
@@ -7,9 +8,10 @@ class NewsCard extends StatelessWidget {
     required this.place,
     required this.cost,
     required this.image,
+    required this.content,
   }) : super(key: key);
 
-  final String name, place, cost, image;
+  final String name, place, cost, image, content;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,16 @@ class NewsCard extends StatelessWidget {
                 color: Colors.white,
                 child: ElevatedButton(
                     onPressed: () {
-                      //;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CurrentNewsScreen(
+                                    cost: '',
+                                    image: image,
+                                    name: '',
+                                    place: '',
+                                    content: content,
+                                  )));
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.white),
