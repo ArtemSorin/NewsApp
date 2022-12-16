@@ -154,14 +154,16 @@ class _NewsScreenState extends State<NewsScreen> {
                                       : snapshot.data![index].title,
                                   place: snapshot.data![index].title.length > 20
                                       ? "${snapshot.data![index].title.substring(0, 23)}..."
-                                      : snapshot.data![index].title,
-                                  cost: snapshot.data![index].title
+                                      : snapshot.data![index].publishedAt
+                                          .toString(),
+                                  data: snapshot.data![index].publishedAt
                                       .toString()
                                       .substring(0, 16),
                                   image: snapshot.data![index].urlToImage,
                                   content: snapshot.data![index].content == null
                                       ? "${snapshot.data![index].title}"
                                       : snapshot.data![index].content,
+                                  url: snapshot.data![index].url,
                                 );
                               });
                         } else if (snapshot.hasError) {
@@ -214,6 +216,18 @@ class _NewsScreenState extends State<NewsScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             return NewsCountry(
                               image: snapshot.data![index].urlToImage,
+                              title: snapshot.data![index].title.length > 20
+                                  ? utf8.decode(utf8.encode(
+                                      "${snapshot.data![index].title.substring(0, 15)}..."))
+                                  : snapshot.data![index].title,
+                              description: snapshot.data![index].title.length >
+                                      20
+                                  ? utf8.decode(utf8.encode(
+                                      "${snapshot.data![index].title.substring(0, 15)}..."))
+                                  : snapshot.data![index].title,
+                              data: snapshot.data![index].publishedAt
+                                  .toString()
+                                  .substring(0, 16),
                             );
                           });
                     } else if (snapshot.hasError) {

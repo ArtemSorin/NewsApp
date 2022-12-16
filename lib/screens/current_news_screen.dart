@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/components/news.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CurrentNewsScreen extends StatelessWidget {
   const CurrentNewsScreen(
@@ -8,10 +8,11 @@ class CurrentNewsScreen extends StatelessWidget {
       required this.place,
       required this.cost,
       required this.image,
-      required this.content})
+      required this.content,
+      required this.url})
       : super(key: key);
 
-  final String name, place, cost, image, content;
+  final String name, place, cost, image, content, url;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,19 @@ class CurrentNewsScreen extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
+          actions: [
+            IconButton(
+                onPressed: () async => {
+                      if (await canLaunch(url))
+                        {await launch(url)}
+                      else
+                        {throw 'Could not launch $url'}
+                    },
+                icon: const Icon(
+                  Icons.rocket_launch_sharp,
+                  color: Color.fromARGB(255, 91, 117, 240),
+                ))
+          ],
           title: const Text(
             'Back',
             style: TextStyle(
@@ -51,7 +65,7 @@ class CurrentNewsScreen extends StatelessWidget {
             ),
             Text(
               content,
-              style: TextStyle(fontSize: 12, color: Colors.black),
+              style: const TextStyle(fontSize: 12, color: Colors.black),
             ),
           ],
         ));

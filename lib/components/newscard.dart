@@ -6,12 +6,13 @@ class NewsCard extends StatelessWidget {
     Key? key,
     required this.name,
     required this.place,
-    required this.cost,
+    required this.data,
     required this.image,
     required this.content,
+    required this.url,
   }) : super(key: key);
 
-  final String name, place, cost, image, content;
+  final String name, place, data, image, content, url;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class NewsCard extends StatelessWidget {
                                     name: '',
                                     place: '',
                                     content: content,
+                                    url: url,
                                   )));
                     },
                     style: ButtonStyle(
@@ -85,7 +87,7 @@ class NewsCard extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.only(top: 5),
                               child: Text(
-                                cost,
+                                data,
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 91, 117, 240),
                                     fontWeight: FontWeight.bold,
